@@ -156,7 +156,21 @@
   ntfs3g
   lm_sensors
   #neovim
+  gst_all_1.gstreamer
+  gst_all_1.gst-plugins-base
+  gst_all_1.gst-plugins-good
+  gst_all_1.gst-plugins-bad
+  gst_all_1.gst-plugins-ugly
+  gst_all_1.gst-libav
   ];
+  systemd.user.services.invert-webcam ={
+  description = "Inverter webcam image";
+  wantedBy = [ "default.target" ];
+  serviceConfig ={
+    ExecStart = "${pkgs.gst_all_1.gstreamer}/bin/gst-launch-1.0 v4l2src device=/dev/video0 ! videoflip method=rotate-180 ! waylandsink";
+    Restart = "always";
+  };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
