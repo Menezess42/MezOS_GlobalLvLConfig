@@ -162,7 +162,8 @@
   # gst_all_1.gst-plugins-bad 
   # gst_all_1.gst-plugins-ugly
   # gst_all_1.gst-libav       
- papirus-icon-theme
+  papirus-icon-theme
+  obs-studio
   ];
   systemd.user.services.invert-webcam ={
   description = "Inverter webcam image";
@@ -251,6 +252,4 @@
 
 
     # services.xserver.displayManager.lightdm.greeters.slick.enable=true;
-
-
 }
