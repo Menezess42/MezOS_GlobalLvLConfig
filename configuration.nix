@@ -164,6 +164,7 @@
   # gst_all_1.gst-libav       
   papirus-icon-theme
   obs-studio
+  krita
   ];
   systemd.user.services.invert-webcam ={
   description = "Inverter webcam image";
