@@ -62,7 +62,7 @@
   };
   environment.sessionVariables = {WL_NO_HARDWARE_CURSOR="1"; NIXOS_OZONE_WL="1";};
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr];
 
 
   # Configure keymap in X11
@@ -111,11 +111,6 @@
   #   # no need to redefine it in your config for now)
   #   #media-session.enable = true;
   # };
-  services.pipewire = {
-  enable = false;
-  alsa.enable = false;
-  pulse.enable = false;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -163,7 +158,12 @@
   # gst_all_1.gst-plugins-ugly
   # gst_all_1.gst-libav       
   papirus-icon-theme
-  obs-studio
+  #obs-studio
+  xdg-desktop-portal
+  xdg-desktop-portal-wlr
+  wl-clipboard
+  grim
+  slurp
   krita
   ];
   systemd.user.services.invert-webcam ={
@@ -257,5 +257,13 @@
 # dedicatedServer.openFirewall=true;
 # localNetworkGameTransfers.openFirewall = true;
 # };
-    # services.xserver.displayManager.lightdm.greeters.slick.enable=true;
+  # services.xserver.displayManager.lightdm.greeters.slick.enable=true;
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      # obs-pipewire-audio-capture
+    ];
+  };
 }
