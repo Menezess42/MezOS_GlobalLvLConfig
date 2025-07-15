@@ -257,7 +257,4 @@
 # localNetworkGameTransfers.openFirewall = true;
 # };
 # services.xserver.displayManager.lightdm.greeters.slick.enable=true;
-    services.pipewire = {
-        enable = false;
-    };
 }
