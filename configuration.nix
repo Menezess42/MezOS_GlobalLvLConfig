@@ -62,7 +62,7 @@
     };
     environment.sessionVariables = {WL_NO_HARDWARE_CURSOR="1"; NIXOS_OZONE_WL="1";};
     xdg.portal.enable = true;
-    xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk  pkgs.xdg-desktop-portal-wlr ];
+    # xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk  pkgs.xdg-desktop-portal-wlr ];
 
 
 # Configure keymap in X11
