@@ -163,6 +163,8 @@
             grim
             slurp
             krita
+            xorg.xorgserver
+            wayland-protocols
             ];
     systemd.user.services.invert-webcam ={
         description = "Inverter webcam image";
@@ -257,4 +259,9 @@
 # localNetworkGameTransfers.openFirewall = true;
 # };
 # services.xserver.displayManager.lightdm.greeters.slick.enable=true;
+
+
+### Tests for try to solve Obsidian hyprland flickering
+boot.kernelParams = ["nvidia-drm.modeset=1"];
+hardware.opengl.enable=true;
 }
