@@ -264,5 +264,7 @@
 ### Tests for try to solve Obsidian hyprland flickering
 boot.kernelParams = ["nvidia-drm.modeset=1"];
 hardware.opengl.enable=true;
-NIXOS_OZONE_WL="1";
+environment.sessionVariables.NIXOS_OZONE_WL="1";
+
+
 }
