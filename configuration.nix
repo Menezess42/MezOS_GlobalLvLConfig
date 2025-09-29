@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -10,24 +6,14 @@
         ./hardware-configuration.nix
         ];
 
-# Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
     networking.hostName = "nixos"; # Define your hostname.
-# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-# Configure network proxy if necessary
-# networking.proxy.default = "http://user:password@proxy:port/";
-# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-# Enable networking
         networking.networkmanager.enable = true;
 
-# Set your time zone.
     time.timeZone = "America/Sao_Paulo";
 
-# Select internationalisation properties.
     i18n.defaultLocale = "pt_BR.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -42,12 +28,8 @@
         LC_TIME = "pt_BR.UTF-8";
     };
 
-# Enable the X11 windowing system.
     services.xserver.enable = true;
 
-# Enable the GNOME Desktop Environment.
-# services.xserver.displayManager.gdm.enable = true;
-# services.xserver.desktopManager.gnome.enable = true;
     services={
         displayManager.sddm = {
             enable = true;
@@ -62,16 +44,12 @@
     };
     environment.sessionVariables = {WL_NO_HARDWARE_CURSOR="1";};
     xdg.portal.enable = true;
-    # xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk  pkgs.xdg-desktop-portal-wlr ];
 
-
-# Configure keymap in X11
     services.xserver.xkb = {
         layout = "br";
         variant = "nodeadkeys";
     };
 
-# Configure console keymap
     console = {keyMap = "br-abnt2";
         packages = [pkgs.terminus_font];
         font="${pkgs.terminus_font}/share/consolefonts/ter-i22.psf.gz";
@@ -92,10 +70,8 @@
     };
 
 
-# Enable CUPS to print documents.
     services.printing.enable = true;
 
-# Enable sound with pipewire.
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
 
@@ -104,38 +80,23 @@
             alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
-# If you want to use JACK applications, uncomment the following
-#jack.enable = true;
     };
-# Enable touchpad support (enabled default in most desktopManager).
-# services.xserver.libinput.enable = true;
-
-# Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.menezess42 = {
         isNormalUser = true;
         description = "Menezess42";
         extraGroups = [ "networkmanager" "wheel" ];
         shell=pkgs.zsh;
-# packages = with pkgs; [
-# git
-# kitty
-# chromium
-# ];
     };
 
-# Install firefox.
     programs.firefox.enable = true;
 
     nixpkgs.config = {
         allowUnfree = true;
         doCheck = false;
     };
-# List packages installed in system profile. To search, run:
-# $ nix search wget
     environment.systemPackages = with pkgs; [
         qt6.qtwayland
             qt6Packages.qtwayland
-#nvtop
             btop
             wget
             virtualglLib
@@ -148,15 +109,7 @@
             kitty
             ntfs3g
             lm_sensors
-#neovim
-# gst_all_1.gstreamer       
-# gst_all_1.gst-plugins-base
-# gst_all_1.gst-plugins-good
-# gst_all_1.gst-plugins-bad 
-# gst_all_1.gst-plugins-ugly
-# gst_all_1.gst-libav       
             papirus-icon-theme
-#obs-studio
             xdg-desktop-portal
             xdg-desktop-portal-wlr
             wl-clipboard
@@ -175,31 +128,6 @@
         };
     };
 
-# Some programs need SUID wrappers, can be configured further or are
-# started in user sessions.
-# programs.mtr.enable = true;
-# programs.gnupg.agent = {
-#   enable = true;
-#   enableSSHSupport = true;
-# };
-
-# List services that you want to enable:
-
-# Enable the OpenSSH daemon.
-# services.openssh.enable = true;
-
-# Open ports in the firewall.
-# networking.firewall.allowedTCPPorts = [ ... ];
-# networking.firewall.allowedUDPPorts = [ ... ];
-# Or disable the firewall altogether.
-# networking.firewall.enable = false;
-
-# This value determines the NixOS release from which the default
-# settings for stateful data, like file locations and database versions
-# on your system were taken. It‘s perfectly fine and recommended to leave
-# this value at the release version of the first install of this system.
-# Before changing this value read the documentation for this option
-# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system.stateVersion = "25.11"; # Did you read the comment?
         hardware.graphics = {
             enable = true;
@@ -223,13 +151,11 @@
         powerManagement.finegrained = false;
         open = false;
         nvidiaSettings = true;
-#package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
     programs.zsh.enable = true;
     stylix ={
         enable=true;
         image = ./wall.png;
-#base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
         override = {
             base00 = "22303c";  # Fundo acinzentado azulado, confortável
                 base01 = "2e3c48";  # Cinza escuro para status bars
@@ -252,19 +178,7 @@
         autoEnable = true;
     };
 
-# programs.steam = {
-# enable = true;
-# remotePlay.openFirewall = true;
-# dedicatedServer.openFirewall=true;
-# localNetworkGameTransfers.openFirewall = true;
-# };
-# services.xserver.displayManager.lightdm.greeters.slick.enable=true;
-
-
-### Tests for try to solve Obsidian hyprland flickering
 boot.kernelParams = ["nvidia-drm.modeset=1"];
 hardware.opengl.enable=true;
-environment.sessionVariables.NIXOS_OZONE_WL="1";
-
-
+# environment.sessionVariables.NIXOS_OZONE_WL="1";
 }
