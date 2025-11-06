@@ -184,10 +184,10 @@ environment.sessionVariables.NIXOS_OZONE_WL="1";
 
 nix.settings = {
 # Limita o número de *build jobs* simultâneos (processos paralelos de build)
-    max-jobs = 3;
+    max-jobs = 4;
 
 # Limita os núcleos usados por cada build individual
-    cores = 3;
+    cores = 6;
 };
 
 
